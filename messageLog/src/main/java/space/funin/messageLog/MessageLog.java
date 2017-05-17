@@ -18,7 +18,7 @@ public class MessageLog
 {
     public static void main( String[] args )
     {
-        DiscordAPI api = Javacord.getApi("token goes here", true); // true means it's a bot
+        DiscordAPI api = Javacord.getApi("token goes here.", true); // true means it's a bot
 
         api.connect(new FutureCallback<DiscordAPI>() {
             public void onSuccess(final DiscordAPI api) {
