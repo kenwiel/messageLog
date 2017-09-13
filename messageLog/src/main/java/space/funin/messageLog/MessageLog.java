@@ -18,7 +18,7 @@ public class MessageLog
 {
     public static void main( String[] args )
     {
-        DiscordAPI api = Javacord.getApi("MzA3MzIwMzE1MTc0NzE1NDEz.DGtDcA.IG7fCDSYtHPVwrlKBBcf3dkdhOg", true); // true means it's a bot
+        DiscordAPI api = Javacord.getApi("MzA3MzIwMzE1MTc0NzE1NDEz.DGtDcA.IG7fCDSYtHPVwrlKBBcf3dkdhOg", true); // old token, disabled, dont even need to try.
 
         api.connect(new FutureCallback<DiscordAPI>() {
             public void onSuccess(final DiscordAPI api) {
