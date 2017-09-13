@@ -10,17 +10,38 @@ import de.btobastian.javacord.entities.Server;
 import de.btobastian.javacord.entities.User;
 import de.btobastian.javacord.entities.message.Message;
 import de.btobastian.javacord.entities.message.embed.EmbedBuilder;
+import de.btobastian.javacord.entities.permissions.Role;
+import de.btobastian.javacord.listener.message.MessageCreateListener;
 import de.btobastian.javacord.listener.message.MessageDeleteListener;
 import de.btobastian.javacord.listener.message.MessageEditListener;
 
-public class MyMessageListener implements MessageEditListener, MessageDeleteListener {
+public class MyMessageListener implements MessageCreateListener, MessageEditListener, MessageDeleteListener {
     private Channel log;
+    private Server server;
     
     public MyMessageListener(Server server) {
     	List<Channel> channelList = new ArrayList<Channel>(server.getChannels());
     	for(Channel c : channelList) {
     		if (c.getName().equalsIgnoreCase("message_log"))
     			this.log = c;
+    	}
+    	this.server = server;
+    }
+    
+    public void onMessageCreate(DiscordAPI api, Message message) {
+    	Channel channel = message.getChannelReceiver();
+    	Server messageServer = channel.getServer();
+    	if(!messageServer.getId().equals(server.getId()))
+    		return;
+    	if(message.getAuthor().isBot())
+    		return;
+    	if(message.getContent().startsWith("!!id")) {
+    		List<Role> mentions = message.getMentionedRoles();
+    		EmbedBuilder eb = new EmbedBuilder().setColor(Color.CYAN);
+    		for(Role r : mentions) {
+				eb.addField(r.getName(), r.getId(), false);
+    		}
+    		channel.sendMessage("", eb);
     	}
     }
 
