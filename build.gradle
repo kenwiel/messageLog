@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group 'kenwiel'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'com.github.btobastian:javacord:v_3-SNAPSHOT'
+
+}
+
+mainClassName = 'messageLog.MessageLog'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    options.incremental = true
+}
