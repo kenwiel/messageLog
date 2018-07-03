@@ -3,6 +3,7 @@ package messageLog;
 import org.javacord.api.AccountType;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
+import org.javacord.api.entity.activity.ActivityType;
 
 public class MessageLog {
 
@@ -19,8 +20,11 @@ public class MessageLog {
 
         api.addMessageDeleteListener(Helper::sendMessage);
 
-
         api.addMessageEditListener(Helper::sendMessage);
+
+
+        api.updateActivity("your every move.", ActivityType.WATCHING);
+
     }
 
 }
