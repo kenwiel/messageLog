@@ -22,7 +22,6 @@ public class MessageLog {
 
         api.addMessageEditListener(Helper::sendMessage);
 
-
         api.updateActivity("your every move.", ActivityType.WATCHING);
 
     }
